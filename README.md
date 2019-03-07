@@ -3,7 +3,7 @@ Wordpress Plugin for Money Button
 
 To deploy, copy the folder (plugin-for-money-button) into your Wordpress Plugin directory, then Activate the plugin in your Plugins window.
 
-Add money button parameters on Money Button Plugin Settings (Dashboard -> Settings -> Money Button).
+Add money button parameters on Money Button Plugin Settings (Settings -> Money Button).
 
 To add Money Button in your posts, embed money button field {{MONEYBUTTON}} inside your blocks. You may change this default money button field value in the settings for security purposes. 
 
