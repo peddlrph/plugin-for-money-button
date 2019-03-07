@@ -7,9 +7,12 @@ Add money button parameters on Money Button Plugin Settings (Dashboard -> Settin
 
 To add Money Button in your posts, embed money button field {{MONEYBUTTON}} inside your blocks. You may change this default money button field value in the settings for security purposes. 
 
+
+
 NOTE: 
 	This is work-in-progress and has not been fully tested. Have been developed in Wordpress version 5.1 .
 	If you encounter errors or have problems accessing Dashboard, you may remove the plugin from the Plugins directory to recover.
+
 
 You may contact me on Twitter and Telegram: peddlrph
 
