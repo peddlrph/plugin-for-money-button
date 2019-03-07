@@ -10,7 +10,7 @@ Text Domain: plugin-for-money-button
 */
 
 function moneybutton_enqueue_javascript() { 
-    wp_enqueue_script( 'moneybutton', 'https://api.moneybutton.com/moneybutton.js' ); 
+    wp_enqueue_script( 'moneybutton', 'https://www.moneybutton.com/moneybutton.js' ); 
 }
 	
 add_action( 'wp_enqueue_scripts', 'moneybutton_enqueue_javascript' );
