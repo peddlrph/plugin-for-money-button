@@ -16,6 +16,8 @@ NOTE:
 	This is work-in-progress and has not been fully tested. Have been developed in Wordpress version 5.1 .
 	If you encounter errors or have problems accessing Dashboard, you may remove the plugin from the Plugins directory to recover.
 
+Here's a quick guide: https://gameswiper.com/blog/?p=36
+
 You may contact me on Twitter and Telegram: peddlrph
 
 Handcash: $peddlrph
