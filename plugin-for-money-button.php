@@ -2,9 +2,11 @@
 /*
 Plugin Name: Plugin for Money Button
 Plugin URI: https://github.com/peddlrph/plugin-for-money-button
-Description: Plugin that allows you to embed money button into Wordpress post
-Version: 0.1
+Description: Plugin that allows you to embed money button into Wordpress post. Shortcode: [moneybutton]
+Version: 1.0
 Author: peddlrph
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Author URI: https://github.com/peddlrph 
 Text Domain: plugin-for-money-button
 */
@@ -12,28 +14,25 @@ Text Domain: plugin-for-money-button
 function moneybutton_enqueue_javascript() { 
     wp_enqueue_script( 'moneybutton', 'https://www.moneybutton.com/moneybutton.js' ); 
 }
-	
+    
 add_action( 'wp_enqueue_scripts', 'moneybutton_enqueue_javascript' );
 
+function moneybutton_func( $atts ){
+    
+    $default_data_amount = get_option('data_amount');
+    $customparameters = shortcode_atts( array('amount' => $default_data_amount,), $atts );
 
-function mb_filter( $content ) {
+    $data_amount = $customparameters['amount'];
 
-	$default_money_button_field = '{{MONEYBUTTON}}';
-	
-	$money_button_field = get_option('money_button_field',$default_money_button_field);
+    $data_to = get_option('data_to');    
+    $data_currency = get_option('data_currency');
+    $data_label = get_option('data_label');
+    $mbdiv = '<div class="money-button"  data-to="' . $data_to .'"  data-amount="' . $data_amount .'"  data-currency="' . $data_currency .'"  data-label="' . $data_label .'" ></div>';
 
-	$data_to = get_option('data_to');
-	$data_amount = get_option('data_amount');
-	$data_currency = get_option('data_currency');
-	$data_label = get_option('data_label');
-	$mbdiv = '<div class="money-button"  data-to="' . $data_to .'"  data-amount="' . $data_amount .'"  data-currency="' . $data_currency .'"  data-label="' . $data_label .'" ></div>';
-
-	$content = str_replace( $money_button_field, $mbdiv, $content );
-
-	return $content;
+    return $mbdiv;
 }
 
-add_filter('the_content', 'mb_filter' );
+add_shortcode( 'moneybutton', 'moneybutton_func' );
 
 add_action('admin_menu', 'money_button_plugin_create_menu');
 
@@ -50,7 +49,6 @@ function register_money_button_plugin_settings() {
     register_setting( 'money-button-plugin-settings-group', 'data_amount' );
     register_setting( 'money-button-plugin-settings-group', 'data_currency' );
     register_setting( 'money-button-plugin-settings-group', 'data_label' );
-    register_setting( 'money-button-plugin-settings-group', 'money_button_field' );
 }
 
 function money_button_plugin_settings_page() {
@@ -68,7 +66,7 @@ function money_button_plugin_settings_page() {
         </tr>
          
         <tr valign="top">
-        <th scope="row">Amount</th>
+        <th scope="row">Default Amount</th>
         <td><input type="text" name="data_amount" value="<?php echo esc_attr( get_option('data_amount') ); ?>" /></td>
         </tr>
         
@@ -93,10 +91,6 @@ function money_button_plugin_settings_page() {
         <th scope="row">Label</th>
         <td><input type="text" name="data_label" value="<?php echo esc_attr( get_option('data_label') ); ?>" /></td>
         </tr>
-        <tr valign="top">
-        <th scope="row">Money Button Field</th>
-        <td><input type="text" name="money_button_field" value="<?php echo esc_attr( get_option('money_button_field',$default_money_button_field) ); ?>" /></td>
-        </tr>
     </table>
     
     <?php submit_button(); ?>
@@ -104,5 +98,3 @@ function money_button_plugin_settings_page() {
 </form>
 </div>
 <?php } ?>
-
-
